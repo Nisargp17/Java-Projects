@@ -7,12 +7,14 @@ import model.Student;
 
 public class StudentDAOImpl implements StudentDAO {
 
-    private final String url = "jdbc:mysql://localhost:3306/student_db";
-    private final String user = "root"; // change if needed
-    private final String password = "Nisarg@30314!"; // change if needed
-
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/student_db?useSSL=false&serverTimezone=UTC",
+                "root", "Nisarg@30314!");
     }
 
     @Override
